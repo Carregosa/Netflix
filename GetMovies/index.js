@@ -12,3 +12,22 @@ module.exports = async function (context, req) {
         body: movies
     };
 };
+
+const { CosmosClient } = require("@azure/cosmos");
+
+const endpoint = process.env.COSMOS_DB_ENDPOINT;
+const key = process.env.COSMOS_DB_KEY;
+const client = new CosmosClient({ endpoint, key });
+const database = client.database("meuBancoDeDados");
+const container = database.container("meuContainer");
+
+module.exports = async function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+
+    const { resources: movies } = await container.items.query("SELECT * from c").fetchAll();
+
+    context.res = {
+        status: 200,
+        body: movies
+    };
+};
