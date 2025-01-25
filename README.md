@@ -23,3 +23,6 @@ Crie um banco de dados e um contêiner:
 az cosmosdb sql database create --account-name minhaContaCosmosDB --name meuBancoDeDados
 az cosmosdb sql container create --account-name minhaContaCosmosDB --database-name meuBancoDeDados --name meuContainer --partition-key-path "/id"
 
+Deploy para o Azure:
+Faça o deploy da função para o Azure:
+func azure functionapp publish minhaFuncaoApp
